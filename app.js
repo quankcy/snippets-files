@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require("morgan");
+const fs = require('fs');
 // const path = require('path');
-// const fs = require('fs');
 
 const app = express()
 const port = 3003
@@ -52,3 +52,8 @@ app.listen(port, () => {
 //     next();
 // });
 app.use('/snippet', express.static('snippet'))
+
+app.get('/subdirs', (req, res) => {
+    let readdirSync = fs.readdirSync(process.cwd());
+    res.send(readdirSync)
+})
