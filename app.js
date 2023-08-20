@@ -55,5 +55,12 @@ app.use('/snippet', express.static('snippet'))
 
 app.get('/subdirs', (req, res) => {
     let readdirSync = fs.readdirSync(process.cwd());
-    res.send(readdirSync)
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(readdirSync)
+})
+
+app.get('/process-cwd', (req, res) => {
+    res.statusCode = 200;
+    res.json(process.cwd());
 })
