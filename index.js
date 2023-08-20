@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const fs = require('fs');
 // const path = require('path');
 
-const app = express()
+const index = express()
 const port = 3003
 
 // app.use(function (req, res, next) {
@@ -12,9 +12,9 @@ const port = 3003
 //     next();
 // });
 
-app.use(morgan('combined'))
+index.use(morgan('combined'))
 
-app.get('/', (req, res) => {
+index.get('/', (req, res) => {
     res.send('<html><body>Hello World!</body></html>')
 })
 
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 //     // res.json({'data': "asd"})
 // })
 
-app.listen(port, () => {
+index.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
@@ -51,16 +51,16 @@ app.listen(port, () => {
 //     console.log("RESPONSE-END")
 //     next();
 // });
-app.use('/snippet', express.static('snippet'))
+index.use('/snippet', express.static('snippet'))
 
-app.get('/subdirs', (req, res) => {
+index.get('/subdirs', (req, res) => {
     let readdirSync = fs.readdirSync(process.cwd());
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(readdirSync)
 })
 
-app.get('/process-cwd', (req, res) => {
+index.get('/process-cwd', (req, res) => {
     res.statusCode = 200;
     res.json(process.cwd());
 })
